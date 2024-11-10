@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS.css">
+    <title>To-do List</title>
+</head>
+<body>
+    <main>
+        <div id="MainInput">
+            <input type="text" id="Valor">
+            <button onclick="Consultar()" type="submit">Consultar</button>
+        </div>
+
+        <section id="Container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>HomeWork</th>
+                        <th>Fecha de Agregación</th>
+                        <th>Fecha de Eliminación</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script>
+    let show = document.getElementById('tableBody');
+    
+     
+    show.innerHTML = '';
+
+    function Consultar() {
+        const fecha = new Date();
+        let fullDate = fecha.getHours() + ':' + fecha.getMinutes() + ' - ' + fecha.getDate() + '/' + (fecha.getMonth() + 1) + '/' + fecha.getFullYear();
+
+        console.log(fullDate);
+
+        let Valor = document.getElementById("Valor").value;
+
+        fetch('/', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ Valor, fullDate })
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+            BODY();  
+        })
+        .catch(err => console.log(err));
+    }
+
+    function DELETEValue(id) {
+        fetch(`/DELETE/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                console.log('The values has been deleted.');
+            } else {
+                console.log('Error to delete the value.');
+            }
+            
+        })
+        .catch(err => console.log(err));
+        BODY(); 
+    }
+
+    function BODY() {
+        let show = document.getElementById('tableBody');  
+        show.innerHTML = '';  
+
+        fetch('/data')
+            .then(response => response.json())
+            .then(result => {
+                result.data.forEach(items => {
+                    let row = `
+                        <tr>
+                            <td>${items.ID}</td>
+                            <td>${items.Information}</td>
+                            <td>${items.Entrada}</td>
+                            <td>${items.Eliminar}</td>
+                            <td>
+                                <div id="buttonContainer">
+                                    <button id="delete" onclick="DELETEValue(${items.ID})">Delete</button>
+                                    <button id="update" onclick="UPDATEValue(${items.ID})">Update</button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                    show.innerHTML += row;
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
+
+    
+    BODY();
+
+
+function UPDATEValue(id) {
+    let Valor = document.getElementById("Valor").value;
+
+    fetch(`/Update/${id}`,{
+
+method:'PATCH',
+headers:{
+     "Content-Type": "application/json"
+},body:JSON.stringify({Valor})
+
+    })
+.then(response=>response.json())
+.then(result => {
+            if (result.success) {
+                console.log('The values has been updated.');
+                 
+            } else {
+                console.log('Error to update the value.');
+            }
+             
+        })
+        .catch(err => console.log(err));
+        BODY();
+}
+
+
+
+
+    </script>
+</body>
+</html>

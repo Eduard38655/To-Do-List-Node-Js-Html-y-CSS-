@@ -1,0 +1,122 @@
+*{
+    padding: 0;
+    height: 0;
+}
+
+body{
+    width: 1400px;
+    height: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between;
+    background-color: rgb(81, 81, 131);
+}
+main{
+    width: 1400px;
+    height: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-around;
+    flex-direction: column;
+ }
+#Container{
+    width: 800px;
+    height: 500px;
+    display: flex;
+ 
+ 
+}
+#MainInput{
+    width: 530px;
+    height: 120px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+ 
+}
+#MainInput input{
+    width: 300px;
+    height: 20px;
+    padding: 25px;
+   font-size: 25px;
+   border-radius: 15px;
+   border: 1px solid gray;
+}
+#MainInput button{
+    width: 100px;
+    height: 73px;
+    margin-left: 10px;
+    border-radius: 15px;
+    font-size: 15px;
+    border: 1px solid gray;
+background-color: green;
+color: white;
+}
+
+th,td,thead{
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+}
+table{
+    width: 820px;
+    height: 100px;
+     text-align: center;
+     color: white;
+} 
+table th{
+    width: 800px;
+    height: 50px;
+    padding: 10px;
+    
+}
+#InformationContainer{
+    display: flex;
+    
+}
+
+#buttonContainer{
+    width: 210px ;
+    height: 55px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+     align-items: center;
+     justify-content: center;
+     
+}
+#buttonContainer button{
+    width: 80px;
+    height: 40px;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+#TableContainer{
+    width: 800px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+
+}
+#main{
+width: 500px;
+    height: 500px; 
+    display: flex;
+    flex-direction: column;
+}
+#delete{
+    border: 1px solid gray;
+    color: white;
+    background-color: red;
+}
+
+#update{
+    border: 1px solid gray;
+    color: white;
+    background-color: blue; 
+}
